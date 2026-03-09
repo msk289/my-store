@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Baitul Bazar - Slider & Products</title>
+<style>
+body {margin:0; font-family: Arial,sans-serif; background:#f4f4f4;}
+header{background:#f85606; color:white; padding:15px 30px; display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center;}
+header .logo{font-size:28px; font-weight:bold;}
+header .search input{width:250px; padding:8px 12px; border-radius:4px; border:none; margin-top:5px; transition:0.3s;}
+header .search input:focus{width:350px;}
+
+/* Slider Styles */
+.slider-wrapper{position:relative; max-width:600px; margin:30px auto; overflow:hidden;}
+.slider-container{position:relative; background:white; border-radius:12px; box-shadow:0 4px 20px rgba(0,0,0,0.25);}
+.slider-slide{display:none; flex-direction:column; align-items:center; text-align:center; padding:20px;}
+.slider-slide img{width:300px; border-radius:12px; margin-bottom:15px; transition:transform 0.3s;}
+.slider-slide img:hover{transform:scale(1.05);}
+.slider-slide h3{margin:0; font-size:22px; color:#f85606; font-weight:bold;}
+.slider-slide p{margin:8px 0 0; font-size:15px; color:#555;}
+.slider-slide .price{font-size:18px; color:#f85606; font-weight:bold; margin:10px 0;}
+.slider-slide button.buy{background:#f85606; border:none; color:white; padding:10px 20px; border-radius:5px; cursor:pointer; transition:0.3s;}
+.slider-slide button.buy:hover{background:#d94b00;}
+.slider-buttons{position:absolute; top:50%; width:100%; display:flex; justify-content:space-between; transform:translateY(-50%);}
+.slider-buttons button{background:rgba(0,0,0,0.5); color:white; border:none; padding:10px; cursor:pointer; border-radius:50%; font-size:18px;}
+
+/* Decorative banners outside slider */
+.banner-left, .banner-right{
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+    background:rgba(248,86,6,0.85);
+    color:white;
+    padding:15px 20px;
+    font-size:14px;
+    border-radius:8px;
+    text-align:center;
+    width:180px;
+    font-weight:bold;
+    z-index:10;
+}
+.banner-left{left:-200px;} /* slider کے باہر left side */
+.banner-right{right:-200px;} /* slider کے باہر right side */
+
+/* Products Grid */
+.container{padding:20px 30px; display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:25px;}
+.product{background:white; border-radius:12px; overflow:hidden; box-shadow:0 4px 15px rgba(0,0,0,0.1); text-align:center; transition:transform 0.3s, box-shadow 0.3s; position:relative;}
+.product:hover{transform:translateY(-5px) scale(1.03); box-shadow:0 8px 25px rgba(0,0,0,0.2);}
+.product img{width:100%; border-bottom:1px solid #eee; transition:transform 0.3s;}
+.product img:hover{transform:scale(1.1);}
+.product .price{font-size:18px; color:#f85606; font-weight:bold; margin:10px 0;}
+.product button.buy{background:#f85606; border:none; color:white; padding:10px 20px; border-radius:5px; cursor:pointer; margin-bottom:10px; transition:0.3s;}
+.product button.buy:hover{background:#d94b00;}
+
+footer{background:#222; color:white; text-align:center; padding:25px; margin-top:40px; font-size:14px;}
+
+@media(max-width:600px){
+  header{flex-direction:column;text-align:center;} 
+  header .search input{width:100%; margin-top:10px;} 
+  .slider-slide img{width:80%;}
+  .banner-left, .banner-right{display:none;}
+}
+</style>
+</head>
+<body>
+
+<header>
+<div class="logo">Baitul Bazar</div>
+<div class="search">
+<input type="text" placeholder="Search in store...">
+</div>
+</header>
+
+<!-- Slider with 2 Products -->
+<div class="slider-wrapper">
+<div class="banner-left">Trending Deals Just For You</div>
+<div class="banner-right">Shop Smart, Save More!</div>
+
+<div class="slider-container">
+<div class="slider-slide">
+<img src="https://img.drz.lazcdn.com/static/pk/p/a4478c016f4d4701dd64ab1c4ab8aa2f.png_720x720q80.png_.webp">
+<h3>Gentle Baby Wipes</h3>
+<p>Soft & hypoallergenic baby wipes for sensitive skin. Pack of 5 x 70 sheets.</p>
+<div class="price">Rs. 1,499</div>
+<button class="buy" onclick="window.open('https://wa.me/923366003079')">Buy Now</button>
+</div>
+
+<div class="slider-slide">
+<img src="https://img.drz.lazcdn.com/static/pk/p/bedaa2033ed4cc54d9829ece4cf414a6.png_720x720q80.png_.webp">
+<h3>Washable Urine Sheet</h3>
+<p>Reusable waterproof mattress protector, ideal for babies. Soft & easy to clean.</p>
+<div class="price">Rs. 2,599</div>
+<button class="buy" onclick="window.open('https://wa.me/923366003079')">Buy Now</button>
+</div>
+
+<div class="slider-buttons">
+<button onclick="prevSlide()">&#10094;</button>
+<button onclick="nextSlide()">&#10095;</button>
+</div>
+</div>
+</div>
+
+<!-- Products Grid -->
+<div class="container">
+<div class="product"><img src="https://img.drz.lazcdn.com/static/pk/p/4a59656b84d6591913cb938eeea9eaae.png_720x720q80.png_.webp"><div class="price">Rs. 4,500</div><button class="buy" onclick="window.open('https://wa.me/923366003079')">Buy Now</button></div>
+<div class="product"><img src="https://img.drz.lazcdn.com/static/pk/p/c24e275a11d0c57267cdc12e43403bce.png_720x720q80.png_.webp"><div class="price">Rs. 2,899</div><button class="buy" onclick="window.open('https://wa.me/923366003079')">Buy Now</button></div>
+<div class="product"><img src="https://img.drz.lazcdn.com/static/pk/p/dd1a7496236a3e8b06aeb4131236ce1a.png_720x720q80.png_.webp"><div class="price">Rs. 175</div><button class="buy" onclick="window.open('https://wa.me/923366003079')">Buy Now</button></div>
+<div class="product"><img src="https://img.drz.lazcdn.com/static/pk/p/16e7376fabf0b188065fc00e09949d60.jpg_720x720q80.jpg_.webp"><div class="price">Rs. 4,000</div><button class="buy" onclick="window.open('https://wa.me/923366003079')">Buy Now</button></div>
+<div class="product"><img src="https://img.drz.lazcdn.com/static/pk/p/9dc0e96329d6d349fa028675a05c7342.png_720x720q80.png_.webp"><div class="price">Rs. 250</div><button class="buy" onclick="window.open('https://wa.me/923366003079')">Buy Now</button></div>
+<div class="product"><img src="https://img.drz.lazcdn.com/static/pk/p/c143cc2191d1bf83b0c81ecab4c4ede2.png_720x720q80.png_.webp"><div class="price">Rs. 175</div><button class="buy" onclick="window.open('https://wa.me/923366003079')">Buy Now</button></div>
+<div class="product"><img src="https://img.drz.lazcdn.com/static/pk/p/67c7cd53ac6ba972a3f1457de0f3850f.png_720x720q80.png_.webp"><div class="price">Rs. 350</div><button class="buy" onclick="window.open('https://wa.me/923366003079')">Buy Now</button></div>
+<div class="product"><img src="https://img.drz.lazcdn.com/static/pk/p/0431185d19c9f83a3a42710da620f542.png_960x960q80.png_.webp"><div class="price">Rs. 1,550</div><button class="buy" onclick="window.open('https://wa.me/923366003079')">Buy Now</button></div>
+</div>
+
+<footer>
+© 2026 Baitul Bazar Store | WhatsApp Order: +92 336 6003079
+</footer>
+
+<script>
+let slideIndex = 0;
+const slides = document.querySelectorAll('.slider-slide');
+
+function showSlide(n){
+    slides.forEach((s,i)=>s.style.display='none');
+    slideIndex = n;
+    if(slideIndex >= slides.length) slideIndex=0;
+    if(slideIndex < 0) slideIndex=slides.length-1;
+    slides[slideIndex].style.display='flex';
+}
+
+function nextSlide(){ showSlide(slideIndex+1); }
+function prevSlide(){ showSlide(slideIndex-1); }
+
+showSlide(0);
+</script>
+
+</body>
+</html>
